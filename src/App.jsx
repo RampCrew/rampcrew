@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import BottomNav from './components/BottomNav'
@@ -8,14 +8,11 @@ import BookRamp from './pages/BookRamp'
 import RampConditions from './pages/RampConditions'
 import Marketplace from './pages/Marketplace'
 import RampMap from './pages/RampMap'
-import AdminDashboard from './pages/AdminDashboard'
 
 export default function App() {
-  const [isAdmin, setIsAdmin] = useState(false)
-
   return (
     <div className="min-h-screen bg-navy-900 text-white max-w-md mx-auto relative">
-      <Navbar isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
+      <Navbar />
       <main className="pb-20 pt-16">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -24,7 +21,6 @@ export default function App() {
           <Route path="/conditions" element={<RampConditions />} />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/map" element={<RampMap />} />
-          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </main>
       <BottomNav />
