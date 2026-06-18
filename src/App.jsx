@@ -9,6 +9,7 @@ import RampConditions from './pages/RampConditions'
 import Marketplace from './pages/Marketplace'
 import RampMap from './pages/RampMap'
 import AdminDashboard from './pages/AdminDashboard'
+import HelperTerms from './pages/HelperTerms'
 
 const BASE_API = 'https://superagent-9068a6ba.base44.app/functions'
 
@@ -116,6 +117,7 @@ function PublicLayout() {
           <Route path="/book"       element={<BookRamp />} />
           <Route path="/conditions" element={<RampConditions />} />
           <Route path="/helpers"    element={<Marketplace />} />
+          <Route path="/helper-terms" element={<HelperTerms />} />
           <Route path="/map"        element={<RampMap />} />
           <Route path="*"           element={<Navigate to="/" replace />} />
         </Routes>

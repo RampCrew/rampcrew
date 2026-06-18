@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { Shield, UserPlus, CheckCircle, Clock, Search, Camera, FileText, Star, AlertCircle, Users, ChevronRight, MapPin, DollarSign } from 'lucide-react'
 
 const BASE_API = 'https://superagent-9068a6ba.base44.app/functions'
@@ -362,7 +363,7 @@ function ApplyForm() {
       {/* Agreement */}
       <div className="bg-white/3 border border-white/10 rounded-xl p-4 space-y-3">
         <div className="text-xs text-gray-400 leading-relaxed">
-          By submitting you agree to RampCrew's <span className="text-crew-teal underline">Helper Terms of Service</span>, consent to a background check, and confirm all information is accurate.
+          By submitting you agree to RampCrew's <Link to="/helper-terms" className="text-crew-teal underline">Helper Terms of Service</Link>, consent to a background check, and confirm all information is accurate.
         </div>
         <button onClick={() => setAgreed(a => !a)} className="flex items-center gap-3 w-full">
           <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all shrink-0 ${agreed ? 'border-crew-teal bg-crew-teal' : 'border-white/20'}`}>
