@@ -2,10 +2,212 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a1628" />
-    <title>RampCrew - North Idaho Boat Launch Service</title>
+
+    <!-- Primary SEO Meta Tags -->
+    <title>RampCrew – Boat Launch Help, Ramp Conditions & Helpers | North Idaho</title>
+    <meta name="description" content="RampCrew makes boat launching easy in North Idaho. Get live ramp conditions at Higgens Point, City Park, Blackwell Island, Sandpoint & more. Book a concierge launch helper on Lake Coeur d'Alene, Lake Pend Oreille, and Hayden Lake." />
+    <meta name="keywords" content="boat launch help Coeur d'Alene, boat ramp service North Idaho, boat launch concierge, Lake Coeur d'Alene ramp conditions, Higgens Point boat ramp, City Park ramp wait time, Sandpoint boat launch, Lake Pend Oreille ramp, boat ramp helper Idaho, RampCrew" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="RampCrew" />
+    <link rel="canonical" href="https://rampcrew.pages.dev/" />
+
+    <!-- Open Graph (Facebook, LinkedIn, iMessage previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rampcrew.pages.dev/" />
+    <meta property="og:title" content="RampCrew – Boat Launch Help & Ramp Conditions | North Idaho" />
+    <meta property="og:description" content="Live ramp wait times, concierge launch help, and verified local helpers on Lake Coeur d'Alene, Lake Pend Oreille, and Hayden Lake. Download-free — works in your browser." />
+    <meta property="og:image" content="https://rampcrew.pages.dev/og-image.jpg" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="RampCrew" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RampCrew – Boat Launch Help | North Idaho" />
+    <meta name="twitter:description" content="Live ramp conditions, concierge launch help & verified helpers on Lake Coeur d'Alene, Pend Oreille & Hayden Lake." />
+    <meta name="twitter:image" content="https://rampcrew.pages.dev/og-image.jpg" />
+
+    <!-- Geo Tags (critical for local SEO) -->
+    <meta name="geo.region" content="US-ID" />
+    <meta name="geo.placename" content="Coeur d'Alene, Idaho" />
+    <meta name="geo.position" content="47.6736;-116.7799" />
+    <meta name="ICBM" content="47.6736, -116.7799" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Schema.org Structured Data: LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://rampcrew.pages.dev/#business",
+      "name": "RampCrew",
+      "description": "Boat launch concierge service and helper marketplace for North Idaho lakes. Live ramp conditions, slot booking, and verified local launch helpers.",
+      "url": "https://rampcrew.pages.dev",
+      "logo": "https://rampcrew.pages.dev/og-image.jpg",
+      "image": "https://rampcrew.pages.dev/og-image.jpg",
+      "telephone": "",
+      "email": "",
+      "priceRange": "$",
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Cash, Credit Card",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Coeur d'Alene",
+          "sameAs": "https://en.wikipedia.org/wiki/Coeur_d%27Alene,_Idaho"
+        },
+        {
+          "@type": "City",
+          "name": "Sandpoint",
+          "sameAs": "https://en.wikipedia.org/wiki/Sandpoint,_Idaho"
+        },
+        {
+          "@type": "City",
+          "name": "Hayden",
+          "sameAs": "https://en.wikipedia.org/wiki/Hayden,_Idaho"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "North Idaho"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Coeur d'Alene",
+        "addressRegion": "ID",
+        "postalCode": "83814",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 47.6736,
+        "longitude": -116.7799
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          "opens": "05:00",
+          "closes": "21:00"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "RampCrew Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Concierge Boat Launch Help",
+              "description": "Expert local helpers assist with launching and recovering your boat at North Idaho ramps."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Live Ramp Condition Reports",
+              "description": "Real-time wait times and surface conditions for all 6 major boat ramps on Lake Coeur d'Alene, Lake Pend Oreille, and Hayden Lake."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Ramp Slot Booking",
+              "description": "Reserve your boat launch time slot in advance to skip the line."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Verified Helper Marketplace",
+              "description": "Hire ID-verified, background-checked local helpers for your launch day."
+            }
+          }
+        ]
+      },
+      "sameAs": []
+    }
+    </script>
+
+    <!-- Schema.org: MobileApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "RampCrew",
+      "description": "Boat launch app for North Idaho — live ramp conditions, concierge help, and helper marketplace for Lake Coeur d'Alene, Lake Pend Oreille, and Hayden Lake.",
+      "url": "https://rampcrew.pages.dev",
+      "applicationCategory": "SportsApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "1"
+      }
+    }
+    </script>
+
+    <!-- Schema.org: FAQ Page (targets featured snippets) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I get help launching my boat at Higgens Point?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RampCrew connects you with verified local helpers at Higgens Point on Lake Coeur d'Alene. Open the app, tap 'Concierge Launch Help', and book a helper for your date and time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the current wait times at Coeur d'Alene boat ramps?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RampCrew shows live, crowd-sourced wait times for all 6 North Idaho ramps including Higgens Point, City Park, and Blackwell Island. Reports expire after 2 hours so you always see current conditions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which boat ramps does RampCrew cover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RampCrew covers 6 ramps across 3 lakes: Higgens Point, City Park Ramp, and Blackwell Island on Lake Coeur d'Alene; Sandpoint City Ramp and Hope Boat Basin on Lake Pend Oreille; and Honeysuckle Beach Ramp on Hayden Lake."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to download an app to use RampCrew?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No download needed. RampCrew is a web app that works in your phone's browser. Just visit rampcrew.pages.dev and add it to your home screen for quick access."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are RampCrew helpers verified?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every helper on RampCrew goes through government ID verification, photo confirmation, and a background check before being approved to work on the platform."
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

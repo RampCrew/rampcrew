@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import BottomNav from './components/BottomNav'
 import Home from './pages/Home'
@@ -12,12 +12,11 @@ import AdminDashboard from './pages/AdminDashboard'
 
 const BASE_API = 'https://superagent-9068a6ba.base44.app/functions'
 
-// Password is NEVER stored in client JS — validated server-side via adminLogin function
 function AdminGate() {
-  const [token, setToken]   = useState(() => sessionStorage.getItem('rc_admin_token'))
-  const [expiry, setExpiry] = useState(() => Number(sessionStorage.getItem('rc_admin_expiry') || 0))
-  const [pw, setPw]         = useState('')
-  const [error, setError]   = useState('')
+  const [token, setToken]     = useState(() => sessionStorage.getItem('rc_admin_token'))
+  const [expiry, setExpiry]   = useState(() => Number(sessionStorage.getItem('rc_admin_expiry') || 0))
+  const [pw, setPw]           = useState('')
+  const [error, setError]     = useState('')
   const [loading, setLoading] = useState(false)
 
   const isAuthed = token && expiry > Date.now()
@@ -59,28 +58,41 @@ function AdminGate() {
 
   if (!isAuthed) {
     return (
-      <div className="min-h-screen bg-navy-900 flex items-center justify-center px-6">
-        <div className="w-full max-w-sm space-y-6">
-          <div className="text-center space-y-2">
-            <div className="text-4xl">⚓</div>
-            <h1 className="text-2xl font-bold text-white">RampCrew Admin</h1>
-            <p className="text-gray-400 text-sm">Authorized access only</p>
+      <div
+        style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}
+        className="bg-navy-900"
+      >
+        <div style={{ width: '100%', maxWidth: '360px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+            <div style={{ fontSize: '48px', marginBottom: '12px' }}>⚓</div>
+            <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#fff', margin: 0 }}>RampCrew Admin</h1>
+            <p style={{ color: '#6b7280', fontSize: '13px', marginTop: '6px' }}>Authorized access only</p>
           </div>
-          <div className="space-y-3">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <input
               type="password"
               value={pw}
               onChange={e => { setPw(e.target.value); setError('') }}
               onKeyDown={e => e.key === 'Enter' && !loading && login()}
-              placeholder="Admin password"
+              placeholder="Enter admin password"
               autoFocus
-              className="w-full bg-white/5 border border-white/10 rounded-xl text-white px-4 py-3 text-sm placeholder-gray-600 outline-none focus:border-crew-teal transition"
+              style={{
+                width: '100%', boxSizing: 'border-box', background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px',
+                color: '#fff', padding: '12px 16px', fontSize: '14px', outline: 'none'
+              }}
             />
-            {error && <p className="text-red-400 text-xs text-center">{error}</p>}
+            {error && (
+              <p style={{ color: '#f87171', fontSize: '12px', textAlign: 'center', margin: 0 }}>{error}</p>
+            )}
             <button
               onClick={login}
               disabled={loading || !pw.trim()}
-              className="w-full bg-crew-blue text-white py-3 rounded-xl font-semibold text-sm disabled:opacity-50"
+              style={{
+                width: '100%', background: loading || !pw.trim() ? 'rgba(26,86,219,0.4)' : '#1a56db',
+                color: '#fff', border: 'none', borderRadius: '12px',
+                padding: '13px', fontSize: '14px', fontWeight: 600, cursor: loading || !pw.trim() ? 'not-allowed' : 'pointer'
+              }}
             >
               {loading ? 'Signing in…' : 'Sign In'}
             </button>
@@ -105,6 +117,7 @@ function PublicLayout() {
           <Route path="/conditions" element={<RampConditions />} />
           <Route path="/helpers"    element={<Marketplace />} />
           <Route path="/map"        element={<RampMap />} />
+          <Route path="*"           element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       <BottomNav />
@@ -114,11 +127,13 @@ function PublicLayout() {
 
 export default function App() {
   const location = useLocation()
-  const isAdmin  = location.pathname.startsWith('/admin')
 
-  if (isAdmin) {
+  // Admin route — completely isolated, NO public nav/header
+  if (location.pathname === '/admin' || location.pathname.startsWith('/admin/')) {
     return (
-      <div className="min-h-screen bg-navy-900 text-white max-w-md mx-auto">
+      <div
+        style={{ minHeight: '100vh', maxWidth: '480px', margin: '0 auto', background: '#0f172a', color: '#fff', position: 'relative' }}
+      >
         <AdminGate />
       </div>
     )
