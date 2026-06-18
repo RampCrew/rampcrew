@@ -10,6 +10,12 @@ import Marketplace from './pages/Marketplace'
 import RampMap from './pages/RampMap'
 import AdminDashboard from './pages/AdminDashboard'
 import HelperTerms from './pages/HelperTerms'
+import LakeCDA from './pages/seo/LakeCDA'
+import HaydenLake from './pages/seo/HaydenLake'
+import Sandpoint from './pages/seo/Sandpoint'
+import PriestLake from './pages/seo/PriestLake'
+import SpiritLake from './pages/seo/SpiritLake'
+import TwinLakes from './pages/seo/TwinLakes'
 
 const BASE_API = 'https://superagent-9068a6ba.base44.app/functions'
 
@@ -118,6 +124,12 @@ function PublicLayout() {
           <Route path="/conditions" element={<RampConditions />} />
           <Route path="/helpers"    element={<Marketplace />} />
           <Route path="/helper-terms" element={<HelperTerms />} />
+          <Route path="/launch/lake-coeur-dalene" element={<LakeCDA />} />
+          <Route path="/launch/hayden-lake"        element={<HaydenLake />} />
+          <Route path="/launch/sandpoint"          element={<Sandpoint />} />
+          <Route path="/launch/priest-lake"        element={<PriestLake />} />
+          <Route path="/launch/spirit-lake"        element={<SpiritLake />} />
+          <Route path="/launch/twin-lakes"         element={<TwinLakes />} />
           <Route path="/map"        element={<RampMap />} />
           <Route path="*"           element={<Navigate to="/" replace />} />
         </Routes>
