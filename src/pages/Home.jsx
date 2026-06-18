@@ -143,6 +143,13 @@ export default function Home() {
           </Link>
         ))}
       </div>
+
+      {/* Disclaimer */}
+      <div className="px-1 pt-2 pb-4">
+        <p className="text-xs text-gray-600 leading-relaxed text-center">
+          RampCrew availability may vary by ramp, date, weather, and helper schedule. RampCrew does not guarantee ramp access, launch timing, or water conditions.
+        </p>
+      </div>
     </div>
   )
 }

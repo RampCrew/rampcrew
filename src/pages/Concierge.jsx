@@ -84,6 +84,13 @@ export default function Concierge() {
         <Phone size={14} />
         <span>Or call us: <a href="tel:+12085550100" className="text-crew-teal">(208) 555-0100</a></span>
       </div>
+
+      {/* Disclaimer */}
+      <div className="px-1 pt-2 pb-4">
+        <p className="text-xs text-gray-600 leading-relaxed text-center">
+          RampCrew availability may vary by ramp, date, weather, and helper schedule. RampCrew does not guarantee ramp access, launch timing, or water conditions.
+        </p>
+      </div>
     </div>
   )
 }
