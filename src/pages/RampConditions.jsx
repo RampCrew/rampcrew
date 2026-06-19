@@ -15,7 +15,8 @@ const RAMPS = [
 const statusConfig = {
   good:   { color: 'text-green-400',  bg: 'bg-green-400/10',  icon: CheckCircle,   label: 'Good' },
   busy:   { color: 'text-yellow-400', bg: 'bg-yellow-400/10', icon: Clock,         label: 'Busy' },
-  closed: { color: 'text-red-400',    bg: 'bg-red-400/10',    icon: AlertTriangle, label: 'Closed' },
+  closed:  { color: 'text-red-400',    bg: 'bg-red-400/10',    icon: AlertTriangle, label: 'Closed' },
+  unknown: { color: 'text-gray-400',   bg: 'bg-white/5',        icon: Clock,         label: 'No Data' },
 }
 
 function timeAgo(iso) {
@@ -156,8 +157,8 @@ function ReportSheet({ ramp, onClose, onSubmitted }) {
 // ── Ramp Detail ───────────────────────────────────────────────────────────────
 function RampDetail({ ramp, liveData, userLocation, onBack, onReport }) {
   const live = liveData[ramp.id]
-  const status = live?.status || ramp.status
-  const wait = live ? (live.wait_minutes != null ? `${live.wait_minutes} min` : '—') : ramp.wait
+  const status = live?.status || 'unknown'
+  const wait = live && live.wait_minutes != null ? `${live.wait_minutes} min` : '—'
   const surface = live?.surface || null
   const cfg = statusConfig[status]
   const StatusIcon = cfg.icon
@@ -189,8 +190,11 @@ function RampDetail({ ramp, liveData, userLocation, onBack, onReport }) {
           <div className="font-bold text-white">{ramp.name}</div>
           <div className="flex items-center gap-1 text-xs text-gray-500 mt-0.5"><MapPin size={10} />{ramp.lake}</div>
         </div>
-        <div className={`flex items-center gap-1 ${cfg.bg} ${cfg.color} text-xs font-medium px-2.5 py-1 rounded-full`}>
-          <StatusIcon size={12} />{cfg.label}
+        <div className="flex flex-col items-end gap-1">
+          <div className={`flex items-center gap-1 ${cfg.bg} ${cfg.color} text-xs font-medium px-2.5 py-1 rounded-full`}>
+            <StatusIcon size={12} />{cfg.label}
+          </div>
+          {live?.is_operator && <div className="flex items-center gap-1 bg-blue-500/10 text-blue-400 text-xs font-semibold px-2 py-0.5 rounded-full"><span>📡</span> Official</div>}
         </div>
       </div>
 
@@ -352,7 +356,7 @@ export default function RampConditions() {
 
   useEffect(() => { fetchLive(); fetchAllWeather() }, [])
 
-  const getRampStatus = (ramp) => liveData[ramp.id]?.status || ramp.status
+  const getRampStatus = (ramp) => liveData[ramp.id]?.status || 'unknown'
   const selectedRamp = RAMPS.find(r => r.id === selected)
   const filtered = filter === 'all' ? RAMPS : RAMPS.filter(r => getRampStatus(r) === filter)
 
@@ -406,8 +410,8 @@ export default function RampConditions() {
       <div className="space-y-3">
         {filtered.map(ramp => {
           const live = liveData[ramp.id]
-          const status = live?.status || ramp.status
-          const wait = live ? (live.wait_minutes != null ? `${live.wait_minutes} min` : '—') : ramp.wait
+          const status = live?.status || 'unknown'
+          const wait = live && live.wait_minutes != null ? `${live.wait_minutes} min` : '—'
           const cfg = statusConfig[status]
           const StatusIcon = cfg.icon
           const wx = weather[ramp.id]
@@ -426,8 +430,11 @@ export default function RampConditions() {
                     {drive && <div className="flex items-center gap-1 text-xs text-crew-teal"><Car size={10} />{drive}</div>}
                   </div>
                 </div>
-                <div className={`flex items-center gap-1 ${cfg.bg} ${cfg.color} text-xs font-medium px-2 py-1 rounded-full shrink-0`}>
-                  <StatusIcon size={12} />{cfg.label}
+                <div className="flex flex-col items-end gap-1 shrink-0">
+                  <div className={`flex items-center gap-1 ${cfg.bg} ${cfg.color} text-xs font-medium px-2 py-1 rounded-full`}>
+                    <StatusIcon size={12} />{cfg.label}
+                  </div>
+                  {live?.is_operator && <div className="flex items-center gap-1 bg-blue-500/10 text-blue-400 text-xs font-semibold px-2 py-0.5 rounded-full"><span>📡</span> Official</div>}
                 </div>
               </div>
 
@@ -451,7 +458,7 @@ export default function RampConditions() {
 
               {/* Footer */}
               <div className="flex items-center justify-between">
-                <p className="text-xs text-gray-400 flex-1 pr-2 line-clamp-1">{ramp.notes}</p>
+                <p className="text-xs text-gray-400 flex-1 pr-2 line-clamp-1">{live?.notes || (status === 'unknown' ? 'No reports yet.' : '')}</p>
                 <div className="flex items-center gap-1 text-xs text-crew-teal shrink-0">
                   {live ? `${live.report_count} report${live.report_count>1?'s':''}` : 'No reports'}
                   <ChevronRight size={12} />
