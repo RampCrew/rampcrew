@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Calendar, Clock, MapPin, CheckCircle, ChevronDown } from 'lucide-react'
+import { Calendar, Clock, MapPin, CheckCircle } from 'lucide-react'
 import WaiverModal from '../components/WaiverModal'
 
 const ramps = [
@@ -12,9 +12,19 @@ const ramps = [
 ]
 
 const timeSlots = [
-  '6:00 AM', '7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM',
-  '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM',
+  '7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM',
+  '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM',
+  '5:00 PM', '6:00 PM', '7:00 PM', '8:00 PM', '9:00 PM',
 ]
+
+// Idaho uses Pacific time (America/Los_Angeles)
+function isRampsOpen() {
+  const now = new Date()
+  const ptHour = parseInt(
+    now.toLocaleString('en-US', { hour: 'numeric', hour12: false, timeZone: 'America/Los_Angeles' })
+  )
+  return ptHour >= 7 && ptHour < 22 // 7am–10pm PT per IDAPA 26.01.20
+}
 
 export default function BookRamp() {
   const [selectedRamp, setSelectedRamp] = useState(null)
@@ -23,15 +33,14 @@ export default function BookRamp() {
   const [showWaiver, setShowWaiver]     = useState(false)
   const [booked, setBooked]             = useState(false)
 
+  const rampsOpen = isRampsOpen()
   const ramp = ramps.find(r => r.id === selectedRamp)
-  const canBook = selectedRamp && selectedDate && selectedTime
+  const canBook = rampsOpen && selectedRamp && selectedDate && selectedTime
 
-  // Tapping Confirm opens the waiver
   function handleConfirmClick() {
     if (canBook) setShowWaiver(true)
   }
 
-  // User agreed to waiver → complete booking
   function handleWaiverAgree() {
     setShowWaiver(false)
     setBooked(true)
@@ -70,6 +79,19 @@ export default function BookRamp() {
     )
   }
 
+  // ── Closed banner ──────────────────────────────────────────────────────────
+  const ClosedBanner = !rampsOpen && (
+    <div className="bg-red-900/40 border border-red-500/40 rounded-2xl p-4 flex items-start gap-3">
+      <span className="text-red-400 text-lg">🌙</span>
+      <div>
+        <p className="text-red-300 font-semibold text-sm">Ramps Currently Closed</p>
+        <p className="text-red-400/80 text-xs mt-0.5">
+          Idaho state ramps operate 7:00 AM – 10:00 PM (Pacific). Booking is unavailable outside these hours.
+        </p>
+      </div>
+    </div>
+  )
+
   // ── Booking form ───────────────────────────────────────────────────────────
   return (
     <>
@@ -87,6 +109,8 @@ export default function BookRamp() {
           <p className="text-gray-400 text-sm mt-1">Reserve your launch time. No more waiting in line.</p>
         </div>
 
+        {ClosedBanner}
+
         {/* Ramp Selection */}
         <div className="space-y-2">
           <label className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Select Ramp</label>
@@ -94,9 +118,14 @@ export default function BookRamp() {
             {ramps.map((r) => (
               <button
                 key={r.id}
-                onClick={() => setSelectedRamp(r.id)}
+                onClick={() => rampsOpen && setSelectedRamp(r.id)}
+                disabled={!rampsOpen}
                 className={`w-full text-left rounded-2xl p-3 border transition-all ${
-                  selectedRamp === r.id ? 'bg-crew-blue/20 border-crew-blue' : 'bg-white/5 border-transparent'
+                  !rampsOpen
+                    ? 'bg-white/5 border-transparent opacity-50 cursor-not-allowed'
+                    : selectedRamp === r.id
+                    ? 'bg-crew-blue/20 border-crew-blue'
+                    : 'bg-white/5 border-transparent'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -104,9 +133,15 @@ export default function BookRamp() {
                     <div className="text-sm font-medium text-white">{r.name}</div>
                     <div className="text-xs text-gray-500">{r.lake}</div>
                   </div>
-                  <div className="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded-full">
-                    {r.slots} slots open
-                  </div>
+                  {rampsOpen ? (
+                    <div className="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded-full">
+                      {r.slots} slots open
+                    </div>
+                  ) : (
+                    <div className="text-xs text-red-400 bg-red-400/10 px-2 py-1 rounded-full">
+                      Closed
+                    </div>
+                  )}
                 </div>
               </button>
             ))}
@@ -119,8 +154,9 @@ export default function BookRamp() {
           <input
             type="date"
             value={selectedDate}
+            disabled={!rampsOpen}
             onChange={(e) => setSelectedDate(e.target.value)}
-            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white text-sm focus:outline-none focus:border-crew-blue"
+            className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white text-sm focus:outline-none focus:border-crew-blue disabled:opacity-50 disabled:cursor-not-allowed"
           />
         </div>
 
@@ -131,9 +167,14 @@ export default function BookRamp() {
             {timeSlots.map((time) => (
               <button
                 key={time}
-                onClick={() => setSelectedTime(time)}
+                onClick={() => rampsOpen && setSelectedTime(time)}
+                disabled={!rampsOpen}
                 className={`py-2 rounded-xl text-sm font-medium transition-all ${
-                  selectedTime === time ? 'bg-crew-blue text-white' : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                  !rampsOpen
+                    ? 'bg-white/5 text-gray-600 cursor-not-allowed'
+                    : selectedTime === time
+                    ? 'bg-crew-blue text-white'
+                    : 'bg-white/5 text-gray-400 hover:bg-white/10'
                 }`}
               >
                 {time}
@@ -149,7 +190,7 @@ export default function BookRamp() {
             canBook ? 'bg-crew-blue hover:bg-blue-600' : 'bg-white/10 text-gray-500 cursor-not-allowed'
           }`}
         >
-          Confirm Booking
+          {rampsOpen ? 'Confirm Booking' : 'Booking Unavailable'}
         </button>
 
         {/* Safety Rules */}
