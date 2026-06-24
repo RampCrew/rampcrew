@@ -146,12 +146,12 @@ export default function Home() {
 
 
       {/* Footer */}
-      <div className="flex items-center justify-center gap-4 py-4 border-t border-white/5 mt-2">
-        <Link to="/about" className="text-xs text-gray-500 hover:text-gray-300 transition">About</Link>
-        <span className="text-gray-700 text-xs">·</span>
-        <Link to="/contact" className="text-xs text-gray-500 hover:text-gray-300 transition">Contact</Link>
-        <span className="text-gray-700 text-xs">·</span>
-        <Link to="/helper-terms" className="text-xs text-gray-500 hover:text-gray-300 transition">Terms</Link>
+      <div className="flex items-center justify-center gap-4 py-4 border-t border-navy-800/10 mt-2">
+        <Link to="/about" className="text-xs text-navy-700 hover:text-navy-800 transition">About</Link>
+        <span className="text-navy-800/30 text-xs">·</span>
+        <Link to="/contact" className="text-xs text-navy-700 hover:text-navy-800 transition">Contact</Link>
+        <span className="text-navy-800/30 text-xs">·</span>
+        <Link to="/helper-terms" className="text-xs text-navy-700 hover:text-navy-800 transition">Terms</Link>
       </div>
 
       {/* Disclaimer */}
