@@ -11,6 +11,7 @@ import RampMap from './pages/RampMap'
 import AdminDashboard from './pages/AdminDashboard'
 import HelperTerms from './pages/HelperTerms'
 import Contact from './pages/Contact'
+import About from './pages/About'
 import LakeCDA from './pages/seo/LakeCDA'
 import HaydenLake from './pages/seo/HaydenLake'
 import Sandpoint from './pages/seo/Sandpoint'
@@ -133,6 +134,7 @@ function PublicLayout() {
           <Route path="/launch/twin-lakes"         element={<TwinLakes />} />
           <Route path="/map"        element={<RampMap />} />
           <Route path="/contact"     element={<Contact />} />
+          <Route path="/about"       element={<About />} />
           <Route path="*"           element={<Navigate to="/" replace />} />
         </Routes>
       </main>

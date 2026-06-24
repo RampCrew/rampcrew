@@ -144,6 +144,16 @@ export default function Home() {
         ))}
       </div>
 
+
+      {/* Footer */}
+      <div className="flex items-center justify-center gap-4 py-4 border-t border-white/5 mt-2">
+        <Link to="/about" className="text-xs text-gray-500 hover:text-gray-300 transition">About</Link>
+        <span className="text-gray-700 text-xs">·</span>
+        <Link to="/contact" className="text-xs text-gray-500 hover:text-gray-300 transition">Contact</Link>
+        <span className="text-gray-700 text-xs">·</span>
+        <Link to="/helper-terms" className="text-xs text-gray-500 hover:text-gray-300 transition">Terms</Link>
+      </div>
+
       {/* Disclaimer */}
       <div className="px-1 pt-2 pb-4">
         <p className="text-xs text-gray-600 leading-relaxed text-center">
