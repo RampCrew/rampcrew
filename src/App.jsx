@@ -69,7 +69,7 @@ function AdminGate() {
     return (
       <div
         style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}
-        className="bg-navy-900"
+        className="bg-[#f0f4f8]"
       >
         <div style={{ width: '100%', maxWidth: '360px' }}>
           <div style={{ textAlign: 'center', marginBottom: '32px' }}>
@@ -116,7 +116,7 @@ function AdminGate() {
 
 function PublicLayout() {
   return (
-    <div className="min-h-screen bg-navy-900 text-white max-w-md mx-auto relative">
+    <div className="min-h-screen bg-[#f0f4f8] text-navy-800 max-w-md mx-auto relative">
       <Navbar />
       <main className="pb-20 pt-16">
         <Routes>
