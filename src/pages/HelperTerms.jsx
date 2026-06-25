@@ -66,7 +66,7 @@ export default function HelperTerms() {
         },
         {
           title: '12. Contact',
-          body: `For questions about these terms, contact us at hello@rampcrew.com.`,
+          body: `For questions about these terms, reach us through the Contact page.`,
         },
       ].map(({ title, body }) => (
         <div key={title} className="space-y-1.5">
